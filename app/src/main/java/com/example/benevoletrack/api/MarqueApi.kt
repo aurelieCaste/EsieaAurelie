@@ -10,8 +10,8 @@ interface MarqueApi {
     @GET("getallmakes")
     fun getMarqueList(@Query("format") format: String): Call<MarqueListResponse>
 
-    @GET("getmodelsformake/{Make_Name}?format=json")
-    fun getMarqueDetail(@Path("Make_Name") Make_Name: String): Call<MarqueDetailResponse>
+    @GET("GetModelsForMakeId/{Make_ID}?format=json")
+    fun getMarqueDetail(@Path("Make_ID") id: Int): Call<MarqueDetailResponse>
 
 
 }

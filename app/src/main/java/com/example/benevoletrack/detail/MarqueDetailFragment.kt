@@ -5,12 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
-import androidx.navigation.fragment.findNavController
 import com.example.benevoletrack.R
 import com.example.benevoletrack.api.MarqueDetailResponse
-import com.example.benevoletrack.list.Singletons
+import com.example.benevoletrack.Singletons
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -37,7 +35,8 @@ class MarqueDetailFragment : Fragment() {
     }
 
     private fun CallApi() {
-        Singletons.marqueApi.getMarqueDetail("TESLA").enqueue(object : Callback<MarqueDetailResponse>{
+        val id = arguments?.getInt("marqueId") ?: -1
+        Singletons.marqueApi.getMarqueDetail(id).enqueue(object : Callback<MarqueDetailResponse>{
             override fun onFailure(call: Call<MarqueDetailResponse>, t: Throwable) {
 
             }

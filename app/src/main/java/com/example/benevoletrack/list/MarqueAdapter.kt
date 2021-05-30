@@ -6,8 +6,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.benevoletrack.R
+import kotlin.reflect.KFunction1
 
-class MarqueAdapter(private var dataSet: List<Marque>, var listener: ((Marque) -> Unit)? = null ) : RecyclerView.Adapter<MarqueAdapter.ViewHolder>() {
+class MarqueAdapter(private var dataSet: List<Marque>, var listener: ((Int)->Unit)? = null) : RecyclerView.Adapter<MarqueAdapter.ViewHolder>() {
 
 
 
@@ -51,7 +52,7 @@ class MarqueAdapter(private var dataSet: List<Marque>, var listener: ((Marque) -
         viewHolder.textView.text = marque.Make_Name
         viewHolder.itemView.setOnClickListener {
 
-            listener?.invoke(marque)
+            listener?.invoke(position)
         }
     }
 

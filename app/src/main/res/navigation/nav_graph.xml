@@ -20,6 +20,11 @@
         android:name="com.example.benevoletrack.detail.MarqueDetailFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_marque_detail">
+        <argument
+            android:name="marqueId"
+            app:argType="integer"
+            android:defaultValue="-1" />
+
 
         <action
             android:id="@+id/navigateToMarqueListFragment"
