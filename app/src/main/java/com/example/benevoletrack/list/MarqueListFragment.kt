@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.benevoletrack.R
 import com.example.benevoletrack.api.MarqueApi
-import com.example.benevoletrack.api.MarqueResponse
+import com.example.benevoletrack.api.MarqueListResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,9 +18,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
 class MarqueListFragment : Fragment() {
 
     private lateinit var recyclerview: RecyclerView
@@ -29,14 +26,14 @@ class MarqueListFragment : Fragment() {
     private val adapter = MarqueAdapter(listOf(), ::onClickedMarque)
 
 
-    private val layoutManager = LinearLayoutManager(context)
+
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_destination_list, container, false)
+        return inflater.inflate(R.layout.fragment_marque_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,27 +45,23 @@ class MarqueListFragment : Fragment() {
 
         val apply = recyclerview.apply {
             adapter = this@MarqueListFragment.adapter
-            layoutManager = this@MarqueListFragment.layoutManager
+            layoutManager = LinearLayoutManager(context)
         }
 
-        /** La retrofit class génère une implementation de l'API*/
-        val retrofit = Retrofit.Builder()
-                .baseUrl("https://vpic.nhtsa.dot.gov/api/vehicles/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
 
-        val marqueApi: MarqueApi = retrofit.create(MarqueApi::class.java)
+
+
 
 
         /** Appel du serveur Web distant : Lancer une requête de manière asynchrone */
-        marqueApi.getMarqueList("json").enqueue(object: Callback<MarqueResponse>{
+        Singletons.marqueApi.getMarqueList("json").enqueue(object: Callback<MarqueListResponse>{
 
-            override fun onFailure(call: Call<MarqueResponse>, t: Throwable) {
+            override fun onFailure(call: Call<MarqueListResponse>, t: Throwable) {
                 TODO("Not yet implemented")
 
             }
 
-            override fun onResponse(call: Call<MarqueResponse>, response: Response<MarqueResponse>) {
+            override fun onResponse(call: Call<MarqueListResponse>, response: Response<MarqueListResponse>) {
                if(response.isSuccessful && response.body() != null){
                    val marqueResponse = response.body()!!
                    adapter.updateList(marqueResponse.Results)

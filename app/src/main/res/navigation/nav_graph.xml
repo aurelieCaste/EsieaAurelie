@@ -9,7 +9,7 @@
         android:id="@+id/MarqueListFragment"
         android:name="com.example.benevoletrack.list.MarqueListFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_destination_list">
+        tools:layout="@layout/fragment_marque_list">
 
         <action
             android:id="@+id/navigateToMarqueDetailFragment"
@@ -17,9 +17,9 @@
     </fragment>
     <fragment
         android:id="@+id/MarqueDetailFragment"
-        android:name="com.example.benevoletrack.SecondFragment"
+        android:name="com.example.benevoletrack.detail.MarqueDetailFragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        tools:layout="@layout/fragment_marque_detail">
 
         <action
             android:id="@+id/navigateToMarqueListFragment"
