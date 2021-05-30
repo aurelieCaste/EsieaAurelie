@@ -7,7 +7,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.benevoletrack.R
 
-class DestinationAdapter(private var dataSet: List<Destination>) : RecyclerView.Adapter<DestinationAdapter.ViewHolder>() {
+class MarqueAdapter(private var dataSet: List<Marque>, var listener: ((Marque) -> Unit)? = null ) : RecyclerView.Adapter<MarqueAdapter.ViewHolder>() {
+
+
+
+
 
     /**
      * Provide a reference to the type of views that you are using
@@ -25,7 +29,7 @@ class DestinationAdapter(private var dataSet: List<Destination>) : RecyclerView.
     }
 
     /** Méthodes pour notifier quand la liste est changée */
-    fun updateList(list: List<Destination>){
+    fun updateList(list: List<Marque>){
         dataSet = list
         notifyDataSetChanged()
     }
@@ -43,8 +47,12 @@ class DestinationAdapter(private var dataSet: List<Destination>) : RecyclerView.
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        val destination =  dataSet[position]
-        viewHolder.textView.text = destination.name
+        val marque =  dataSet[position]
+        viewHolder.textView.text = marque.Make_Name
+        viewHolder.itemView.setOnClickListener {
+
+            listener?.invoke(marque)
+        }
     }
 
     // Return the size of your dataset (invoked by the layout manager)
