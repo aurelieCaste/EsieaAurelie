@@ -15,7 +15,8 @@ https://github.com/aurelieCaste/EsieaAurelie/blob/master/Screenshot_20210531-164
 Contraintes : 
 Mon application utilise une RecyclerView pour afficher les données de la liste.
 Les données sont stockées en cache via le cache HTTP. 
-Mon application suit l'architecture MVVM et utilise des principes logique tel que (Succes, Error et loader). 
+Mon application suit l'architecture MVVM et utilise des principes logiques tels que (Success, Error et loader). 
+
 
 
 
