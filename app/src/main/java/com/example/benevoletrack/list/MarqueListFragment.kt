@@ -66,9 +66,13 @@ class MarqueListFragment : Fragment() {
                adapter.updateList(marqueModel.marqueList)
            }
 
+
+
         })
 
+
     }
+
 
 
     private fun onClickedMarque(id: String) {

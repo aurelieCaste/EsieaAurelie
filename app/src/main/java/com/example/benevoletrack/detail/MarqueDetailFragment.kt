@@ -5,10 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.fragment.app.viewModels
 import com.example.benevoletrack.R
 import com.example.benevoletrack.api.MarqueDetailResponse
 import com.example.benevoletrack.Singletons
+import com.example.benevoletrack.list.MarqueListViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -17,6 +20,10 @@ import retrofit2.Response
 class MarqueDetailFragment : Fragment() {
 
     private lateinit var textViewName: TextView
+
+
+    /** Création du viewModel (MVVM) */
+    private val viewModel: MarqueListViewModel by viewModels()
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -30,6 +37,8 @@ class MarqueDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         textViewName = view.findViewById(R.id.marque_detail_name)
+
+
         CallApi()
 
     }
