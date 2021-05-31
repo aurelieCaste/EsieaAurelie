@@ -35,8 +35,8 @@ class MarqueDetailFragment : Fragment() {
     }
 
     private fun CallApi() {
-        val id = arguments?.getInt("marqueId") ?: -1
-        Singletons.marqueApi.getMarqueDetail(id).enqueue(object : Callback<MarqueDetailResponse>{
+        val id = arguments?.getString("marqueName") ?: -1
+        Singletons.marqueApi.getMarqueDetail(id as String).enqueue(object : Callback<MarqueDetailResponse>{
             override fun onFailure(call: Call<MarqueDetailResponse>, t: Throwable) {
 
             }

@@ -5,14 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.benevoletrack.R
 import kotlin.reflect.KFunction1
 
-class MarqueAdapter(private var dataSet: List<Marque>, var listener: ((Int)->Unit)? = null) : RecyclerView.Adapter<MarqueAdapter.ViewHolder>() {
-
-
-
-
+class MarqueAdapter(private var dataSet: List<Marque>, var listener: ((String)->Unit)? = null) : RecyclerView.Adapter<MarqueAdapter.ViewHolder>() {
 
     /**
      * Provide a reference to the type of views that you are using
@@ -51,10 +48,12 @@ class MarqueAdapter(private var dataSet: List<Marque>, var listener: ((Int)->Uni
         val marque =  dataSet[position]
         viewHolder.textView.text = marque.Make_Name
         viewHolder.itemView.setOnClickListener {
-
-            listener?.invoke(position)
+            listener?.invoke(marque.Make_Name)
         }
+
+
     }
+
 
     // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount() = dataSet.size

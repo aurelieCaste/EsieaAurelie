@@ -21,8 +21,8 @@
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_marque_detail">
         <argument
-            android:name="marqueId"
-            app:argType="integer"
+            android:name="marqueName"
+            app:argType="string"
             android:defaultValue="-1" />
 
 

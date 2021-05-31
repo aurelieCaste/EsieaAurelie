@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,7 +18,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-
+/** MarqueListFragment : Affichage des données */
 class MarqueListFragment : Fragment() {
 
     private lateinit var recyclerview: RecyclerView
@@ -24,7 +26,8 @@ class MarqueListFragment : Fragment() {
     /** Création de l'adapter */
     private val adapter = MarqueAdapter(listOf(), ::onClickedMarque)
 
-
+    /** Création du viewModel (MVVM) */
+    private val viewModel: MarqueListViewModel by viewModels()
 
 
     override fun onCreateView(
@@ -48,27 +51,17 @@ class MarqueListFragment : Fragment() {
         }
 
 
-
-
-
-
-        /** Appel du serveur Web distant : Lancer une requête de manière asynchrone */
-        Singletons.marqueApi.getMarqueList("json").enqueue(object: Callback<MarqueListResponse>{
-
-            override fun onFailure(call: Call<MarqueListResponse>, t: Throwable) {
-                TODO("Not yet implemented")
-
-            }
-
-            override fun onResponse(call: Call<MarqueListResponse>, response: Response<MarqueListResponse>) {
-               if(response.isSuccessful && response.body() != null){
-                   val marqueResponse = response.body()!!
-                   adapter.updateList(marqueResponse.Results)
-               }
-            }
-
-
+        viewModel.marqueList.observe(viewLifecycleOwner, Observer { list ->
+            adapter.updateList(list)
         })
+
+
+
+
+
+
+
+
 
 
         /** première partie TD2 : ViewHolder :
@@ -86,9 +79,9 @@ class MarqueListFragment : Fragment() {
 
 
 
-    private fun onClickedMarque(id: Int) {
+    private fun onClickedMarque(id: String) {
         findNavController().navigate(R.id.navigateToMarqueDetailFragment, bundleOf(
-                "marqueId" to (id + 1)
+                "marqueName" to id
 
         ))
     }

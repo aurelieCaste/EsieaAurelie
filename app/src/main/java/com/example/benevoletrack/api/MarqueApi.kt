@@ -1,4 +1,4 @@
-package com.example.benevoletrack.api
+ package com.example.benevoletrack.api
 
 import retrofit2.Call
 import retrofit2.http.GET
@@ -10,8 +10,8 @@ interface MarqueApi {
     @GET("getallmakes")
     fun getMarqueList(@Query("format") format: String): Call<MarqueListResponse>
 
-    @GET("GetModelsForMakeId/{Make_ID}?format=json")
-    fun getMarqueDetail(@Path("Make_ID") id: Int): Call<MarqueDetailResponse>
+    @GET("getmodelsformake/{Make_Name}?format=json")
+    fun getMarqueDetail(@Path("Make_Name") id: String): Call<MarqueDetailResponse>
 
 
 }
