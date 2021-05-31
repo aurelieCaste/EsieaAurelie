@@ -4,7 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -22,6 +25,8 @@ import retrofit2.Response
 class MarqueListFragment : Fragment() {
 
     private lateinit var recyclerview: RecyclerView
+    private lateinit var loader: ProgressBar
+    private lateinit var textViewError: TextView
 
     /** Création de l'adapter */
     private val adapter = MarqueAdapter(listOf(), ::onClickedMarque)
@@ -43,7 +48,9 @@ class MarqueListFragment : Fragment() {
 
 
         /** Recuperer un élément de ma vue */
-        recyclerview= view.findViewById(R.id.destination_recyclerview)
+        recyclerview= view.findViewById(R.id.marque_recyclerview)
+        loader= view.findViewById(R.id.marque_Loader)
+        textViewError= view.findViewById(R.id.marque_Error)
 
         val apply = recyclerview.apply {
             adapter = this@MarqueListFragment.adapter
@@ -51,32 +58,17 @@ class MarqueListFragment : Fragment() {
         }
 
 
-        viewModel.marqueList.observe(viewLifecycleOwner, Observer { list ->
-            adapter.updateList(list)
+        viewModel.marqueList.observe(viewLifecycleOwner, Observer { marqueModel ->
+            loader.isVisible = marqueModel is MarqueLoader
+            textViewError.isVisible = marqueModel is MarqueError
+
+           if( marqueModel is MarqueSuccess) {
+               adapter.updateList(marqueModel.marqueList)
+           }
+
         })
 
-
-
-
-
-
-
-
-
-
-        /** première partie TD2 : ViewHolder :
-
-        val destinationList = arrayListOf<Destination>().apply {
-            add(Destination("Afrique du Sud"))
-            add(Destination("Botswana"))
-            add(Destination("Ouganda"))
-            add(Destination("Madagascar"))
-            add(Destination("Sénégal"))
-        }
-*/
-
     }
-
 
 
     private fun onClickedMarque(id: String) {
