@@ -1,4 +1,4 @@
-# EsieaAurelie
+# Aurélie Castellani
 #Programmation mobile - CFA-3A-31a
 
 Mon projet d'application mobile à pour but d'afficher une liste de marques de véhicules, ou autres moyens de mobilité avec tous les modèles qu'elles proposent.
