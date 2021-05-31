@@ -7,10 +7,6 @@
     tools:context=".list.MarqueListFragment">
 
 
-
-
-
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/marque_recyclerview"
         android:layout_width="match_parent"

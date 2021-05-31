@@ -74,7 +74,6 @@ class MarqueListFragment : Fragment() {
     }
 
 
-
     private fun onClickedMarque(id: String) {
         findNavController().navigate(R.id.navigateToMarqueDetailFragment, bundleOf(
                 "marqueName" to id
